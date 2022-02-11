@@ -1,6 +1,5 @@
 import './App.css'
 import CountrRegistry from './CountryRegistry'
-import bootstrap from 'bootstrap'
 
 function App() {
   return (
