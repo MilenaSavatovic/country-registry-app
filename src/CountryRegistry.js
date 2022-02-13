@@ -2,7 +2,10 @@ import axios from 'axios'
 import React, { useState } from 'react'
 
 export default function CountrRegistry() {
-  let [keyword, steKeyword] = useState(null)
+  let [keyword, steKeyword] = useState('France')
+  let [results, setResults] = useState(null)
+  let [loaded, setLoaded] = useState(false)
+  let [capital, setCapital] = useState(null)
 
   function search() {
     let url = `https://restcountries.com/v3.1/name/${keyword}`
@@ -11,7 +14,9 @@ export default function CountrRegistry() {
   }
 
   function handleResponse(response) {
-    console.log(response)
+    console.log(response.data)
+    setResults(response.data[0])
+    setCapital(response.data[0].capital[0])
   }
 
   function handleSubmit(event) {
@@ -24,18 +29,31 @@ export default function CountrRegistry() {
     steKeyword(event.target.value)
   }
 
-  return (
-    <div className="CountryRegistry">
-      <section>
-        <form className="form-group" onSubmit={handleSubmit}>
-          <input
-            type="search"
-            placeholder="Type country"
-            onChange={handleWordChange}
-          />
-          <input type="submit" value="search" className="btn btn-primary" />
-        </form>
-      </section>
-    </div>
-  )
+  function load() {
+    setLoaded(true)
+    search()
+  }
+
+  if (loaded) {
+    return (
+      <div className="CountryRegistry">
+        <section>
+          <form className="form-group" onSubmit={handleSubmit}>
+            <input
+              type="search"
+              placeholder="Type country"
+              onChange={handleWordChange}
+            />
+            <input type="submit" value="search" className="btn btn-primary" />
+          </form>
+        </section>
+        <section>
+          <p>{capital}</p>
+        </section>
+      </div>
+    )
+  } else {
+    load()
+    return 'Loading'
+  }
 }
