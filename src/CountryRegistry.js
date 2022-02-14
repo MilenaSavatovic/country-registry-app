@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Results from './Results'
 
 export default function CountrRegistry() {
   let [keyword, steKeyword] = useState('France')
   let [results, setResults] = useState(null)
   let [loaded, setLoaded] = useState(false)
-  let [capital, setCapital] = useState(null)
 
   function search() {
     let url = `https://restcountries.com/v3.1/name/${keyword}`
@@ -14,9 +14,7 @@ export default function CountrRegistry() {
   }
 
   function handleResponse(response) {
-    console.log(response.data)
     setResults(response.data[0])
-    setCapital(response.data[0].capital[0])
   }
 
   function handleSubmit(event) {
@@ -48,7 +46,7 @@ export default function CountrRegistry() {
           </form>
         </section>
         <section>
-          <p>{capital}</p>
+          <Results results={results} />
         </section>
       </div>
     )
