@@ -2,6 +2,8 @@ import React from 'react'
 import Flags from './Flags'
 import Name from './Name'
 import Continent from './Continent'
+import Currency from './Currency'
+import Languages from './Languages'
 
 export default function Results(props) {
   console.log(props.results)
@@ -39,6 +41,12 @@ export default function Results(props) {
               GoogleMaps
             </a>
           </div>
+        </section>
+        <section>
+          <Languages languages={props.results.languages} />
+        </section>
+        <section>
+          <Currency currency={props.results.currencies} />
         </section>
       </div>
     )

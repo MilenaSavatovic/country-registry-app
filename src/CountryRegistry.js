@@ -45,9 +45,8 @@ export default function CountrRegistry() {
             <input type="submit" value="search" className="btn btn-primary" />
           </form>
         </section>
-        <section>
-          <Results results={results} />
-        </section>
+
+        <Results results={results} />
       </div>
     )
   } else {
